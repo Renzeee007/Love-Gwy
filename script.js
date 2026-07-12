@@ -1,4 +1,4 @@
-// Your newly revised sweet message!
+// Your beautiful, formatted message!
 const message = "Happy Monthsary sa'tin! Bago pa man ako magsimula, gusto ko lang malaman mo na, mahal na mahal kita ng sobra.<br><br>Actually hindi ko alam paano ko sisimulan 'to, pero gusto kong marinig mo mismo sa akin I love you, and sobrang lucky ko kasi ikaw yung kasama ko every day. Every month kasi na dumadaan, parang lalo lang lumalalim ang pagmamahal ko sa'yo, parang bago lagi kahit medyo matagal na tayo.<br><br>Thank you sa lahat, Love. Thank you sa patience mo, sa pagiging maunawain mo, at sa pagmamahal mo na hindi na kailangan pang bigyan ng reason para lang stay ka. Sobrang swerte ko talaga kasi hindi lang naman ikaw matalino at responsable, ang ganda mo pa hindi lang sa labas ha, pati na rin sa puso mo. Kada araw kasi, mas lumalala yung pagmamahal ko sa'yo kasi nakikita ko kung gaano ka kasipag, kung gaano mo kaseryoso mga pangarap mo, at kung gaano mo kamahal yung family niyo.<br><br>Pero hindi rin naman ako perfect, Love. Marami din akong kulang, marami akong mali. Sorry kung minsan nagtatalo tayo, sorry kung hindi ko lagi nabibigay yung gusto mo. Hindi naman kasi ito dahil ayoko kang masaya minsan natatakot lang talaga ako na baka masaktan ka o mapagod ka nang sobra.<br><br>Katulad noong lagi kitang pinipigilan mag OT. Alam mo ba kung bakit? Hindi kasi dahil ayoko lang basta basta ayoko lang kasi mapagod nang sobra ang katawan mo, ayoko madagdagan pa ng pressure ang nararamdaman mo mula sa trabaho. Alam ko naman may time pa rin tayo sa isa't isa kapag umuwi ako, pero hindi ko maitatanggi iba talaga pakiramdam ko kapag maaga kang nakakauwi. Doon ko lang siguro naipapakita nang buo kung gaano kita namimiss makasama.<br><br>Pero ngayon, mas naiintindihan ko na. Hindi lang ito tungkol sa akin ikaw pa rin kasi yung parang nanay sa mga kapatid mo, yung inaasahan nila, yung pinagkukunan nila. Kaya kung kailangan mong mag OT, sige, papayagan na kita isa lang hihilingin ko wag mo lang abusuhin. Wag mong ipagpalit health mo sa extra oras ng trabaho. Sana maintindihan mo, Love hindi to yung ako na gustong mag control sa'yo, gusto ko lang talaga na protektahan ka.<br><br>May isa pa akong gustong sabihin, kahit medyo hirap akong sabihin 'to. Alam mo naman sinabi ko na sa'yo dati pa, bago pa tayo maging tayo hindi ko kasi kaya yung partner na sobrang hilig uminom. Okay lang naman sa akin yung paminsan minsan, tatlo hanggang limang shot tapos tama na. Pero yung malasing nang husto doon talaga ako nahihirapan, Love. Alam kong choice mo na 'yan bago pa tayo nagsimula, kaya minsan naiisip ko na lang, sino ba ako para pigilan ka sa gusto mong gawin? At the end of the day, buhay mo pa rin naman 'yan, choice mo pa rin.<br><br>Kaya sorry kung minsan tumatampo ako, sorry kung minsan hindi ko na kaya itago yung kaba ko. Aamin ako, ito yung isa sa pinaka red flag para sa akin sa relasyon natin. Pero nandito pa rin ako hindi umaalis, hindi bumibitaw kasi mas malaki pa rin pagmamahal ko sa'yo kaysa sa takot ko. Sana maintindihan mo na hindi ko 'to sinasabi para husgahan ka, kundi dahil mahal na mahal kita, at gusto ko lagi kang safe, healthy, at masaya.<br><br>Sana patuloy tayong magmahalan at magtiwala sa isa't isa. Sana kahit anong pagsubok ang dumating, kaya nating harapin 'yun together kasi I believe kaya natin 'to. Hindi tayo perfect, pero yung paraan namin magmahalan, perfect.<br><br>Thank you sa pagiging ikaw, Love. Sana matagal pa tayo, sana dumami pa yung monthsary natin, at sana hanggang dulo, ikaw at ako pa rin.<br><br>I love you, ngayon, bukas, at hanggang sa habang panahon.<br><br>Happy Monthsary. 💛<br><br>Forever yours,<br><br>Bebe Renz";
 
 // Add your photo filenames here
@@ -227,20 +227,36 @@ function generateGarden() {
     generatePlant(vw * 0.60, y3 + 20, 1.8, 0.6 * s); 
 }
 
-// --- 4. The Live Time Counter Logic ---
-const anniversaryDate = new Date("April 16, 2026 00:00:00").getTime();
+// --- 4. NEW: Accurate Month Live Time Counter Logic ---
+const anniversaryDate = new Date("April 16, 2026 00:00:00");
 
 function updateCounter() {
-    const now = new Date().getTime();
-    const difference = now - anniversaryDate;
+    const now = new Date();
+    
+    // Calculate the total months mathematically
+    let months = (now.getFullYear() - anniversaryDate.getFullYear()) * 12 + (now.getMonth() - anniversaryDate.getMonth());
+    
+    // If the current day of the month hasn't passed the anniversary day yet, subtract 1 month to stay accurate
+    if (now.getDate() < anniversaryDate.getDate() || (now.getDate() === anniversaryDate.getDate() && now.getTime() < anniversaryDate.getTime())) {
+        months--;
+    }
 
+    // Create a temporary date to calculate the exact remaining days after those months have passed
+    const recentAnniversary = new Date(anniversaryDate);
+    recentAnniversary.setMonth(recentAnniversary.getMonth() + months);
+
+    // Calculate the remaining time in milliseconds
+    const difference = now.getTime() - recentAnniversary.getTime();
+
+    // Break down the remaining milliseconds into days, hours, minutes, and seconds
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
+    // Output the new format to the screen
     document.getElementById("time-counter").innerHTML = 
-        `${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds`;
+        `${months} Months, ${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds`;
 }
 updateCounter();
 setInterval(updateCounter, 1000);
