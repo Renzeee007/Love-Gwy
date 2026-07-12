@@ -3,34 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Monthsary Love Gwy</title>
+    <title>For You</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="welcome-screen">
-        <h1 class="welcome-text">Tap to Open Your Surprise 💌</h1>
+        <div id="envelope-heart">
+            <svg viewBox="0 0 32 29.6" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+            </svg>
+        </div>
+        <p class="tap-hint">Tap the heart to open</p>
     </div>
 
     <div class="parallax-background">
-        <div class="overlay">
-            <div class="content-container" id="main-content">
-                <h1 class="title">To My Love...</h1>
+        <div class="overlay" id="bg-overlay"></div>
+    </div>
+    
+    <div class="mail-scene" id="mail-scene">
+        <div class="mail-container">
+            <div class="env-back" id="env-back"></div>
+            
+            <div class="letter-paper" id="letter">
+                <h1 id="letter-title" class="letter-title">To My Love Gwy</h1>
                 <div class="message-container">
                     <p id="typewriter-text"></p><span class="cursor">|</span>
                 </div>
                 <button id="bloom-btn" class="action-btn">A Magical Surprise For You ✨</button>
             </div>
+            
+            <div class="env-front" id="env-front"></div>
+            <div class="env-flap" id="env-flap"></div>
         </div>
     </div>
-    
-    <h2 id="monthsary-text" class="monthsary-title">Happy Monthsary Love!</h2>
-    
-    <div id="counter-container">
-        <p class="counter-label">Every beautiful moment since April 16, 2026:</p>
-        <div id="time-counter"></div>
-        
-        <button id="gallery-btn" class="action-btn gallery-btn">Our Memories 📸</button>
+
+    <div id="top-overlay-ui">
+        <h2 id="monthsary-text" class="monthsary-title">Happy Monthsary Love!</h2>
+        <div id="counter-container">
+            <p class="counter-label">Every beautiful moment since April 16, 2026:</p>
+            <div id="time-counter"></div>
+            <button id="gallery-btn" class="action-btn gallery-btn">Our Memories 📸</button>
+        </div>
     </div>
 
     <div id="flower-container">
