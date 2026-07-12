@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary Love Gwy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="welcome-screen">
+        <h1 class="welcome-text">Tap to Open Your Surprise 💌</h1>
+    </div>
+
+    <div class="parallax-background">
+        <div class="overlay">
+            <div class="content-container" id="main-content">
+                <h1 class="title">To My Love...</h1>
+                <div class="message-container">
+                    <p id="typewriter-text"></p><span class="cursor">|</span>
+                </div>
+                <button id="bloom-btn" class="action-btn">A Magical Surprise For You ✨</button>
+            </div>
+        </div>
+    </div>
+    
+    <h2 id="monthsary-text" class="monthsary-title">Happy Monthsary Love!</h2>
+    
+    <div id="counter-container">
+        <p class="counter-label">Every beautiful moment since April 16, 2026:</p>
+        <div id="time-counter"></div>
+        
+        <button id="gallery-btn" class="action-btn gallery-btn">Our Memories 📸</button>
+    </div>
+
+    <div id="flower-container">
+        <svg id="flower-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+
+    <div id="photo-gallery" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="gallery-img">
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+    </div>
+
+    <audio id="bg-music" src="Ikaw at Ako.mp3" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

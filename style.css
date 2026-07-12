@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Playfair Display', serif;
+    background-color: #111; 
+    overflow: hidden; 
+}
+
+/* --- Welcome Screen Styles --- */
+#welcome-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #111;
+    z-index: 9999; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.welcome-text {
+    color: #f8f4e6;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    animation: pulse 2s infinite;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* --- Main Layout --- */
+.parallax-background {
+    background-image: url('your-picture.jpeg'); 
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center bottom; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.overlay {
+    height: 100%; width: 100%;
+    background-color: rgba(0, 0, 0, 0.70); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.content-container {
+    max-width: 800px;
+    width: 100%;
+    color: #f8f4e6;
+    transition: opacity 1.5s ease; 
+}
+
+.content-container.dim { opacity: 0.15; }
+
+/* --- Floating Monthsary Header --- */
+.monthsary-title {
+    position: fixed;
+    top: 8%; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    color: #ff4e6b; 
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px rgba(255, 78, 107, 0.8), 2px 2px 5px rgba(0,0,0,0.9); 
+    opacity: 0; 
+    visibility: hidden;
+    z-index: 100; 
+    pointer-events: none; 
+}
+
+.monthsary-title.show {
+    visibility: visible;
+    animation: fadeInDown 2.5s forwards;
+}
+
+/* --- Floating Counter & New Gallery Button --- */
+#counter-container {
+    position: fixed;
+    top: 18%; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    color: #f8f4e6;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; 
+}
+
+#counter-container.show {
+    visibility: visible;
+    animation: fadeInDown 2.5s forwards 1s; 
+}
+
+.counter-label {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+#time-counter {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2de2e6; 
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(45, 226, 230, 0.6), 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.gallery-btn {
+    pointer-events: auto; /* Allows the button to be clicked even though the container has pointer-events: none */
+    margin-top: 15px;
+    padding: 8px 20px;
+    font-size: 1.1rem;
+    background: rgba(255, 78, 107, 0.2);
+    border-color: #ff4e6b;
+    color: #fff;
+    opacity: 0;
+    display: none; 
+}
+
+.gallery-btn:hover {
+    background: rgba(255, 78, 107, 0.5);
+    box-shadow: 0 0 15px rgba(255, 78, 107, 0.8);
+}
+
+.gallery-btn.show {
+    display: inline-block;
+    animation: fadeIn 2s forwards;
+}
+
+/* --- Text & Original Button --- */
+.title { font-size: 3.5rem; margin-bottom: 2rem; letter-spacing: 2px; opacity: 0; animation: fadeIn 3s forwards; }
+.message-container { font-size: 1.5rem; line-height: 1.8; min-height: 250px; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
+#typewriter-text { display: inline; }
+.cursor { display: inline-block; width: 3px; margin-left: 2px; animation: blink 0.75s step-end infinite; }
+
+.action-btn {
+    margin-top: 40px;
+    padding: 12px 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #f8f4e6;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #f8f4e6;
+    border-radius: 30px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.action-btn:hover { background: rgba(255, 255, 255, 0.3); box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+.action-btn.show { opacity: 1; visibility: visible; animation: fadeIn 2s forwards; }
+
+/* --- NEW: Photo Gallery Modal --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 10000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    max-height: 80vh;
+    object-fit: contain;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: zoom 0.6s;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+@keyframes zoom { from {transform: translateY(-50%) scale(0)} to {transform: translateY(-50%) scale(1)} }
+
+.close-btn {
+    position: absolute;
+    top: 20px; right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-btn:hover, .close-btn:focus { color: #ff4e6b; text-decoration: none; cursor: pointer; }
+
+.prev, .next {
+    cursor: pointer; position: absolute; top: 50%; width: auto;
+    padding: 16px; margin-top: -50px;
+    color: white; font-weight: bold; font-size: 24px;
+    transition: 0.6s ease; border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+.next { right: 0; border-radius: 3px 0 0 3px; }
+.prev { left: 0; }
+.prev:hover, .next:hover { background-color: rgba(255, 78, 107, 0.8); }
+
+/* --- Magical Garden Container --- */
+#flower-container { position: fixed; bottom: 0; left: 0; width: 100vw; height: 100vh; z-index: 10; opacity: 0; pointer-events: none; transition: opacity 1s ease; }
+#flower-svg { width: 100%; height: 100%; display: block; }
+#flower-container.visible { opacity: 1; }
+
+.grass { stroke: #28a745; stroke-width: 3; fill: none; stroke-linecap: round; stroke-dasharray: 800; stroke-dashoffset: 800; }
+.stem { stroke: #2de2e6; stroke-width: 5; fill: none; stroke-linecap: round; stroke-dasharray: 1500; stroke-dashoffset: 1500; filter: drop-shadow(0 0 8px rgba(45, 226, 230, 0.8)); }
+.leaf { transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(0); transform-origin: 0 0; opacity: 0; fill: #1fc5c9; filter: drop-shadow(0 0 5px rgba(45, 226, 230, 0.6)); }
+.petal { transform: rotate(var(--r)) scale(0); transform-origin: 0 0; opacity: 0; filter: drop-shadow(0 0 6px rgba(255, 0, 76, 0.8)); }
+.core { transform: scale(0); transform-origin: center; opacity: 0; filter: drop-shadow(0 0 10px #ffea00); }
+.particle { opacity: 0; transform: translateY(0) scale(0); }
+
+.grow .grass { animation: drawLine 1.5s forwards ease-out var(--delay), sway 4s infinite ease-in-out alternate calc(1.5s + var(--delay)); }
+.grow .stem { animation: drawLine 2.5s forwards ease-out var(--delay); }
+.grow .leaf { animation: popElement 1s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275) var(--delay); }
+.grow .petal { animation: bloomPetal 1.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275) var(--delay); }
+.grow .core { animation: popElement 1s forwards var(--delay); }
+.grow .particle { animation: floatParticle 4s infinite ease-in-out alternate var(--delay); }
+
+.heart-burst { position: fixed; pointer-events: none; animation: floatUpHeart 2s ease-out forwards; font-size: 1.5rem; text-shadow: 0 0 10px rgba(255, 78, 107, 0.8); z-index: 1000; }
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes fadeInDown { from { opacity: 0; transform: translate(-50%, -20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes drawLine { to { stroke-dashoffset: 0; } }
+@keyframes popElement { to { transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(var(--sx, 1), var(--sy, 1)); opacity: 1; } }
+@keyframes bloomPetal { to { transform: rotate(var(--r)) scale(var(--s)); opacity: 1; } }
+@keyframes sway { 0% { transform: skewX(0deg); } 100% { transform: skewX(5deg); } }
+@keyframes floatParticle { 0% { transform: translateY(0) scale(0); opacity: 0; } 20% { transform: translateY(-10px) scale(1); opacity: 1; } 100% { transform: translateY(-50px) scale(0.5); opacity: 0.5; } }
+@keyframes floatUpHeart { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 50% { transform: translate(-50%, -100px) scale(1.2); opacity: 1; } 100% { transform: translate(-50%, -150px) scale(1); opacity: 0; } }
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .welcome-text { font-size: 1.8rem; }
+    .monthsary-title { font-size: 2rem; letter-spacing: 2px; top: 8%; padding: 0 10px; }
+    #counter-container { top: 18%; } 
+    .counter-label { font-size: 1rem; }
+    #time-counter { font-size: 1.2rem; }
+    .title { font-size: 2.2rem; }
+    .message-container { font-size: 1.1rem; line-height: 1.6; min-height: 200px; }
+    .action-btn { font-size: 1rem; padding: 10px 20px; }
+    .modal-content { width: 95%; }
+}
